@@ -17,7 +17,7 @@ call neobundle#begin(expand('~/.vim/bundle/'))
   NeoBundle 'tomasr/molokai'
   NeoBundle 'altercation/vim-colors-solarized'
   NeoBundle 'nathanaelkane/vim-indent-guides'
-"  NeoBundle 'scroolosse/syntastic'
+  NeoBundle 'scrooloose/syntastic'
 call neobundle#end()
 
 " install uninstalled bundles

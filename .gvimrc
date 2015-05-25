@@ -17,4 +17,6 @@ endif
 
 " start fullscreen
 " windows
-au GUIEnter * simalt ~x
+if has('gui_win32')
+  au GUIEnter * simalt ~x
+endif
