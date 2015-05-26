@@ -1,22 +1,22 @@
 " No audible bell
-set vb
+"set vb
 
 " No toolbar
-set guioptions-=T
+"set guioptions-=T
 
 " No menu
-set guioptions-=m
+"set guioptions-=m
 
 " Use console dialogs
-set guioptions+=c
+"set guioptions+=c
 
 " Local config
-if filereadable($HOME . "/.gvimrc.local")
-  source ~/.gvimrc.local
-endif
+"if filereadable($HOME . "/.gvimrc.local")
+"  source ~/.gvimrc.local
+"endif
 
 " start fullscreen
 " windows
-if has('gui_win32')
-  au GUIEnter * simalt ~x
-endif
+"if has('gui_win32')
+"  au GUIEnter * simalt ~x
+"endif

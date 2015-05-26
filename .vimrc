@@ -1,3 +1,6 @@
+" important remaps
+let mapleader=','
+
 " open vimrc
 nnoremap <leader>v :e ~/.vimrc<CR>
 "nnoremap <leader>V :tabnew e ~/.vimrc<CR>
@@ -7,21 +10,25 @@ nnoremap <leader>n :e ~/.vimrc.bundles<CR>
 syntax enable
 
 " key remapping
-nnoremap <Up> <NOP>
 nnoremap <Down> <NOP>
-nnoremap <Right> <NOP>
 nnoremap <Left> <NOP>
+nnoremap <Right> <NOP>
+nnoremap <Up> <NOP>
 
 " general
 set encoding=utf-8  " encoding: UTF-8
 set noswapfile      " create no swap files
 set backspace=2     " deletion in insert mode
+
+" ui
 set laststatus=2    " always display status line
 set showcmd         " show command in bottom bar
+set showmatch       " highlight matching {[()]}
 set cursorline      " highlight current line
 set ruler           " show ruler position
 set rulerformat=%l,%v " rulerformat: line, v?
-set number          " show line numbers (numberwidth=4 (default))
+set number          " show line numbers
+set wildmenu        " visual autocompletion for commands
 
 " tab settings
 set expandtab
@@ -34,6 +41,15 @@ set softtabstop=2
 set textwidth=80
 set colorcolumn=+1
 set wrap
+
+" search
+set incsearch       " immediate search
+set hlsearch        " highlight search results
+nnoremap <leader><space> :nohlsearch<CR>  " stop highlighting
+
+
+" file
+filetype indent on  " filetype-detection & -specific file loading
 
 " include package manager
 if filereadable(expand("~/.vimrc.bundles"))
@@ -57,17 +73,25 @@ let g:cpp_experimental_template_highlight=1
 let g:indent_guides_enable_on_vim_startup=1
 let g:indent_guides_guide_size=2
 
+" gui settings
 if has('gui_running')
-  " font
+  set visualbell    " no audible bell
+  set guioptions-=T " no toolbar
+  set guioptions-=m " no menu
+  set guioptions+=c " use console dialog
+
+  " platform specific settings
   if has('gui_win32')
-    set guifont=Source_Code_Pro:h10:cANSI
+    set guifont=Source_Code_Pro:h10:cANSI " windows font
+    au GUIEnter * simalt ~x " start in fullscreen
   else
-    set guifont=Source\ Code\ Pro\ 10
+    set guifont=Source\ Code\ Pro\ 10     " font
   endif
 
   " colorscheme
   colorscheme molokai
   let g:rehash256=1
 else
+" no gui settings
   colorscheme desert
 endif
