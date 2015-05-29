@@ -1,39 +1,43 @@
 " important remaps
 let mapleader=','
 
-" open vimrc
-nnoremap <leader>v :e ~/.vimrc<CR>
-"nnoremap <leader>V :tabnew e ~/.vimrc<CR>
-nnoremap <leader>n :e ~/.vimrc.bundles<CR>
-"nnoremap <leader>N :tabnew e ~/.vimrc.bundles<CR>
-
-syntax enable
-
-" key remapping
+" disable arrow keys
 nnoremap <Down> <NOP>
 nnoremap <Left> <NOP>
 nnoremap <Right> <NOP>
 nnoremap <Up> <NOP>
 
+" open vimrc
+nnoremap <leader>v :e ~/.vimrc<CR>
+" open package manager: neobundle
+nnoremap <leader>n :e ~/.vimrc.neobundle<CR>
+" open plugins
+nnoremap <leader>p :e ~/.vimrc.plugins<CR>
+
+syntax enable
+
 " general
-set encoding=utf-8  " encoding: UTF-8
-set noswapfile      " create no swap files
-set backspace=2     " deletion in insert mode
+set encoding=utf8
+set noswapfile
+set backspace=2       " deletion in insert mode
+set clipboard=unnamed " use os clipboard
+"set autoindent        " automatically set indent to new line
+"set backspace=eol,start,indent     " deletion in insert mode
+"set whichwrap+=<,>,h,l " ???
 
 " ui
-set laststatus=2    " always display status line
-set showcmd         " show command in bottom bar
-set showmatch       " highlight matching {[()]}
-set cursorline      " highlight current line
-set ruler           " show ruler position
-set rulerformat=%l,%v " rulerformat: line, v?
-set number          " show line numbers
-set wildmenu        " visual autocompletion for commands
+set noruler laststatus=2 " always display status line
+"set statusline=%-15F\ (%c,%l)
+"set statusline=%l,%c%V%=%P
+set showcmd cmdheight=2  " show command with barheight 2
+set cursorline        " highlight current line
+set number            " show line numbers
+set wildmenu          " visual autocompletion for commands
 
 " tab settings
-set expandtab
-set shiftround
-set shiftwidth=2
+set expandtab         " convert tabs to spaces
+set shiftround        " use << and >> for shifting
+set shiftwidth=2      " shift by 2 characters
 set tabstop=2
 set softtabstop=2
 
@@ -45,53 +49,42 @@ set wrap
 " search
 set incsearch       " immediate search
 set hlsearch        " highlight search results
-nnoremap <leader><space> :nohlsearch<CR>  " stop highlighting
-
+set ignorecase      " no case-sensitive search
+" stop highlighting
+nnoremap <leader><space> :nohlsearch<CR>
 
 " file
-filetype indent on  " filetype-detection & -specific file loading
+filetype plugin indent on  " filetype-detection & -specific file loading
 
 " include package manager
-if filereadable(expand("~/.vimrc.bundles"))
-  source ~/.vimrc.bundles
+if filereadable(expand("~/.vimrc.neobundle"))
+  source ~/.vimrc.neobundle
 endif
 
-" syntastic
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-let g:syntastic_always_populate_loc_list=1
-let g:syntastic_auto_loc_list=1
-let g:syntastic_check_on_open=1
-let g:syntastic_check_on_wq=0
+" include plugins
+if filereadable(expand("~/.vimrc.plugins"))
+  source ~/.vimrc.plugins
+endif
 
-" cpp syntax
-let g:cpp_class_scope_highlight=1
-let g:cpp_experimental_template_highlight=1
-
-" indent guide
-let g:indent_guides_enable_on_vim_startup=1
-let g:indent_guides_guide_size=2
+" no error bells
+set noerrorbells visualbell t_vb=
 
 " gui settings
 if has('gui_running')
-  set visualbell    " no audible bell
-  set guioptions-=T " no toolbar
-  set guioptions-=m " no menu
-  set guioptions+=c " use console dialog
+  autocmd GUIEnter * set vb t_vb=  " ensure no error bells for gvim
+
+  set guioptions-=T  " no toolbar
+  set guioptions-=m  " no menu
+  set guioptions+=c  " use console dialog
+  set guioptions-=e  " use console tab page
 
   " platform specific settings
   if has('gui_win32')
-    set guifont=Source_Code_Pro:h10:cANSI " windows font
-    au GUIEnter * simalt ~x " start in fullscreen
+    set guifont=Source_Code_Pro:h10
+    "set guifont=Sauce_Code_Powerline:h10  " plugin: airline
+    autocmd GUIEnter * simalt ~x  " autostart in fullscreen
   else
-    set guifont=Source\ Code\ Pro\ 10     " font
+    set guifont=Source\ Code\ Pro\ 10
+    "set guifont=Sauce\ Code\ Powerline\ h10  " plugin: airline
   endif
-
-  " colorscheme
-  colorscheme molokai
-  let g:rehash256=1
-else
-" no gui settings
-  colorscheme desert
 endif

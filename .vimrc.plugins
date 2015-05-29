@@ -1,0 +1,35 @@
+" plugin: syntastic
+" recommended default settings
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+let g:syntastic_always_populate_loc_list=1
+let g:syntastic_auto_loc_list=1
+let g:syntastic_check_on_open=1
+let g:syntastic_check_on_wq=0
+
+" plugin: vim-indent_guides
+let g:indent_guides_enable_on_vim_startup=1
+let g:indent_guides_guide_size=2
+
+" plugin: vim-better-whitespace
+autocmd VimEnter * silent ToggleStripWhitespaceOnSave
+
+" plugin: rust.vim
+" recognize .rs as Rust files
+autocmd BufRead,BufNewFile *.rs set filetype=rust
+
+" plugin: molokai
+if has('gui_running')
+  colorscheme molokai
+  let g:rehash256=1
+else
+  colorscheme desert
+endif
+
+" plugin: ctrlp.vim
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlP'
+
+" plugin: vim-airline
+"let g:airline_powerline_fonts=1  " Sauce Code Powerline is incorrect
