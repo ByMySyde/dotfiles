@@ -1,3 +1,46 @@
+" .vimrc.plugins
+
+" plugin: vim-airline
+"let g:airline_powerline_fonts=1  " Sauce Code Powerline is incorrect
+let g:airline#extensions#tabline#enabled=1
+let g:airline#extensions#syntastic#enabled=1
+let g:airline#extensions#ctrlp#show_adjacent_modes=0
+
+" plugin: ctrlp.vim
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlP'
+
+" plugin: vim-indent-guides
+let g:indent_guides_enable_on_vim_startup=1
+
+" plugin: vim-better-whitespace
+autocmd VimEnter * silent ToggleStripWhitespaceOnSave
+
+" plugin: vim-clang-format
+autocmd VimEnter * silent ClangFormatAutoToggle
+"      \ "AlignConsecutiveAssignments" : "true",
+"      \ "UseTap" : "Never"}
+let g:clang_format#style_options = {
+      \ "BasedOnStyle" : "google",
+      \ "AccessModifierOffset" : "-1",
+      \ "AlignTrailingComments" : "true",
+      \ "AllowShortIfStatementsOnASingleLine" : "true",
+      \ "AllowShortLoopsOnASingleLine" : "true",
+      \ "ColumnLimit" : "80",
+      \ "IndentWidth" : "2",
+      \ "NamespaceIndentation" : "All",
+      \ "Standard" : "Cpp11"}
+
+" plugin: rust.vim
+autocmd BufRead,BufNewFile *.rs set filetype=rust  " recognize .rs as Rust files
+
+" plugin: nerdtree
+let g:NERDTreeQuitOnOpen=1
+let g:NERDTreeShowBookmarks=1
+let g:NERDTreeShowHidden=1
+let g:NERDTreeMinimalUI=1
+nnoremap <silent><C-n> :NERDTreeToggle<CR>
+
 " plugin: syntastic
 " recommended default settings
 set statusline+=%#warningmsg#
@@ -5,31 +48,11 @@ set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 let g:syntastic_always_populate_loc_list=1
 let g:syntastic_auto_loc_list=1
-let g:syntastic_check_on_open=1
 let g:syntastic_check_on_wq=0
-
-" plugin: vim-indent_guides
-let g:indent_guides_enable_on_vim_startup=1
-let g:indent_guides_guide_size=2
-
-" plugin: vim-better-whitespace
-autocmd VimEnter * silent ToggleStripWhitespaceOnSave
-
-" plugin: rust.vim
-" recognize .rs as Rust files
-autocmd BufRead,BufNewFile *.rs set filetype=rust
+let g:syntastic_cpp_compiler_options='-O0 -std=c++1y -Wall -Winline -W'
 
 " plugin: molokai
-if has('gui_running')
+if &t_Co > 255 ||  has('gui_running')
   colorscheme molokai
   let g:rehash256=1
-else
-  colorscheme desert
 endif
-
-" plugin: ctrlp.vim
-let g:ctrlp_map = '<c-p>'
-let g:ctrlp_cmd = 'CtrlP'
-
-" plugin: vim-airline
-"let g:airline_powerline_fonts=1  " Sauce Code Powerline is incorrect

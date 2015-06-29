@@ -1,0 +1,73 @@
+" .vimrc.settings
+set nocompatible
+filetype plugin indent on
+syntax enable
+
+set encoding=utf-8
+set noswapfile
+set nobackup
+set writebackup
+set backspace=2       " deletion in insert mode
+set clipboard=unnamed " use OS clipboard
+"set autoindent        " automatically set indent to new line
+"set whichwrap+=<,>,h,l " ???
+
+" ui
+set noruler laststatus=2 " always display status line
+"set statusline=%-15F\ (%c,%l)
+"set statusline=%l,%c%V%=%P
+set showcmd cmdheight=2
+set cursorline        " highlight current line
+set scrolloff=999
+set sidescrolloff=5
+set display+=lastline
+set formatoptions+=j
+set wildmenu          " visual autocompletion for commands
+
+"default: relative line numbers; insert mode: total line numbers
+set number relativenumber
+autocmd InsertEnter,FocusLost * silent set norelativenumber number
+autocmd InsertLeave,FocusGained * silent set relativenumber
+
+" tab settings
+set smarttab
+set expandtab         " convert tabs to spaces
+set shiftround        " use << and >> for shifting
+set shiftwidth=2      " shift by 2 characters
+set tabstop=2
+set softtabstop=2
+
+" text width
+set textwidth=80
+set colorcolumn=+1
+set wrap
+
+" immediate, default case-insensitive highlight search
+set incsearch ignorecase smartcase hlsearch
+
+" auto-indent before write
+autocmd BufWritePre * silent call Indent()
+
+" split behaviour
+set splitbelow splitright
+
+" no error bells
+set noerrorbells visualbell t_vb=
+
+" restore cursor position
+augroup resCur
+  autocmd!
+  autocmd BufWinEnter * call ResCur()
+augroup END
+
+" platform specific settings
+if has('gui_win32')
+  set guifont=Source_Code_Pro:h10
+  "set guifont=Sauce_Code_Powerline:h10  " plugin: airline
+else
+  set guifont=Source\ Code\ Pro\ 10
+  "set guifont=Sauce\ Code\ Powerline\ h10  " plugin: airline
+endif
+
+" remember cursor position
+set viminfo='10,\"100,:20,%,n~/.viminfo
