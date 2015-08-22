@@ -20,7 +20,7 @@ if filereadable(expand("~/.vimrc.plugins"))
   source ~/.vimrc.plugins
 endif
 
-" include funtcions
+" include functions
 if filereadable(expand("~/.vimrc.functions"))
   source ~/.vimrc.functions
 endif

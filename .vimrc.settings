@@ -18,7 +18,7 @@ set noruler laststatus=2 " always display status line
 "set statusline=%l,%c%V%=%P
 set showcmd cmdheight=2
 set cursorline        " highlight current line
-set scrolloff=999
+set scrolloff=99
 set sidescrolloff=5
 set display+=lastline
 set formatoptions+=j
@@ -53,6 +53,9 @@ set splitbelow splitright
 
 " no error bells
 set noerrorbells visualbell t_vb=
+
+" mouse only active in normal mode
+set mouse=n
 
 " restore cursor position
 augroup resCur
