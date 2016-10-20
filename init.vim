@@ -66,7 +66,7 @@ autocmd VimEnter * silent ToggleStripWhitespaceOnSave
 
 " vim-clang-format
 autocmd VimEnter * silent ClangFormatAutoToggle
-let g:clan_format#style_options = {
+let g:clang_format#style_options = {
       \ "AccessModifierOffset" : "-1",
       \ "AlignConsecutiveAssignments" : "true",
       \ "AlignTrailingComments" : "true",
