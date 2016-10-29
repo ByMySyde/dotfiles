@@ -1,29 +1,17 @@
-" Neovim
-
 if has('vim_starting')
   set nocompatible
 endif
 
 " autoinstall plug-in manager vim-plug
 " https://github.com/junegunn/vim-plug/
-let s:vim_plug_path='~/.config/nvim/autoload/plug.vim'
+let s:vim_plug_path='~/.vim/autoload/plug.vim'
 let s:vim_plug_url='https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 if empty(glob(s:vim_plug_path))
-  echo 'vim-plug not found.'
-  if executeable('curl')
-    echo 'Downloading vim-plug.'
-    silent execute 'curl -fLo '.s:vim_plug_path.' --create-dirs '.s:vim_plug_url
-  else
-    echo 'Unable to download vim-plug.'
-    finish
-  endif
-  augroup vimplug
-    autocmd!
-    autocmd VimEnter * PlugInstall
-  augroup END
+  silent execute 'curl -fLo '.s:vim_plug_path.' --create-dirs '.s:vim_plug_url
+  autocmd VimEnter * PlugInstall | source $MYVIMRC
 endif
 
-call plug#begin('~/.config/nvim/plugged')
+call plug#begin('~/.vim/plugged')
 Plug 'bling/vim-airline'
 Plug 'kien/ctrlp.vim'
 Plug 'metakirby5/codi.vim'
