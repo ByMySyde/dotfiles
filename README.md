@@ -1,3 +1,3 @@
 ```
-git clone https://github.com/ByMySyde/dotfiles.git
+git clone https://github.com/SimonPirsch/dotfiles
 ```
